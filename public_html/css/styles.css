@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+/* PM stylings */
+.unseen-letter {
+	background-image: url("../images/unseenLetter.png");
+	background-repeat: no-repeat;
+	width: 400px;
+	border: 2px solid transparent;
+}
+.seen-letter {
+	background-image: url("../images/seenLetter.png");
+	background-repeat: no-repeat;
+	width: 400px;
+	border: 2px solid transparent;
+}
+.letter-info {
+	text-align: center;
+	margin: 20% auto;
+}
+.letter-info a{
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+	color: black;
+	text-decoration: none;
+}
