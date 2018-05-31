@@ -105,7 +105,7 @@ class user extends Base
 	
 	function saveImage($imageFileData)
 	{	 
-		$imageLocation = dirname(__FILE__)."/../public_html/user-images/user_".$this->data[$this->keyField].".jpg";
+		$imageLocation = dirname(__FILE__)."/../public_html/user_images/user_".$this->data[$this->keyField].".jpg";
 		
 		move_uploaded_file
 		(
@@ -133,13 +133,13 @@ class user extends Base
 		
 		$fam = $stmt->fetch(PDO::FETCH_ASSOC);
 		
-		$sql="SELECT name FROM user WHERE user_id = ".$userId;
+		$sql="SELECT username FROM user WHERE user_id = ".$userId;
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute();
 		
 		$famName= $stmt->fetch(PDO::FETCH_ASSOC);
 		
-		$famName = (string)$famName['name'];
+		$famName = (string)$famName['username'];
 
 		//echo $userId; die;
 		
@@ -179,15 +179,15 @@ class user extends Base
 		
 		$fam = $stmt->fetch(PDO::FETCH_ASSOC);
 		
-		$sql="SELECT name FROM user WHERE user_id = ".$userId;
+		$sql="SELECT username FROM user WHERE user_id = ".$userId;
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute();
 		
 		$famName= $stmt->fetch(PDO::FETCH_ASSOC);
 		
-		$famName = (string)$famName['name'];
+		$famName = (string)$famName['username'];
 
-		echo "FIRST FAM: ".$fam['familioli'];
+		//echo "FIRST FAM: ".$fam['familioli'];
 		
 		if(strpos($fam['familioli'], "<a href='/ropogu(local)/public_html/user-view.php?user_id=".$userId."'><img src='/ropogu(local)/public_html/rpp-pics/user_".$userId.".jpg'  alt='".$famName."' title='".$famName."'/></a>") !==false)
 		{

@@ -3,6 +3,6 @@
 	
 	$_SESSION = array();
 	
-	header('location: /ropogu(local)/ropogu.php');
+	header('location: ./ropogu.php');
 	exit;
 ?>

@@ -1,5 +1,6 @@
 <?php
 require_once('../inc/user.class.php');
+require_once('../inc/pm.class.php');
 
 $user = new user();
 
@@ -38,5 +39,5 @@ if(isset($_REQUEST['login']))
 	}
 }
 
-require_once('../tpl/user-login.tpl.php');
+require_once('../tpl/ropogu.tpl.php');
 ?>

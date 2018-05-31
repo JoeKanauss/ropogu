@@ -12,12 +12,6 @@ $pm = new pm();
 $sessionUser = $_SESSION['username'];
 $sessionId = $_SESSION['user_id'];
 
-if(!isset($_SESSION['user_id']))
-{
-	header('location: /ropogu(local)/public_html/ropogu.php');
-	exit;
-}
-
 $user->load($sessionId);
 $userDataArray = $user->data;
 
@@ -53,7 +47,7 @@ if(isset($_REQUEST['post-message']))
 		//save
 		if($post->save())
 		{	
-			header('location: /ropogu(local)/public_html/user-view.php?user_id='.$sessionId);
+			header('Refresh: 0');
 			exit;
 		}
 		else
@@ -73,6 +67,5 @@ $sessionPosts = $post->displayPosts($_SESSION['user_id'],"session");
 $allPosts = $post->displayPosts($_SESSION['user_id'],"all");
 $familioliPosts = $post->displayPosts($_SESSION['user_id'],"familioli");
 
-
-require_once('../tpl/user-logged.tpl.php');
+include_once('../tpl/posts.tpl.php');
 ?>

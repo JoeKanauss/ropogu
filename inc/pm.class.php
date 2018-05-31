@@ -60,8 +60,26 @@ class pm extends Base
 		
 			$letters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
-		
-		return $letters;
+		for($x=0; $x<count($letters); $x++)
+			{
+				$sql = "SELECT username FROM user WHERE user_id = ".$letters[$x]['from_id'];
+				$stmt = $this->db->prepare($sql);
+				$stmt->execute();
+				$fromName = $stmt->fetch(PDO::FETCH_ASSOC);
+				array_push($letters[$x], $fromName);
+			}
+
+	
+	return $letters;
+	}
+	
+	function findLetterSender($fromID)
+	{
+		$sql = "SELECT username FROM user WHERE user_id = ".$fromID;
+				$stmt = $this->db->prepare($sql);
+				$stmt->execute();
+				$fromName = $stmt->fetch(PDO::FETCH_ASSOC);
+				return $fromName;
 	}
 	
 	function letterHasBeenSeen($pmID)

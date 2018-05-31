@@ -69,7 +69,7 @@ class post extends Base
 			
 			for($x=0; $x<count($posts); $x++)
 			{
-				$sql = "SELECT name FROM user WHERE user_id = ".$posts[$x]['post_user'];
+				$sql = "SELECT username FROM user WHERE user_id = ".$posts[$x]['post_user'];
 				$stmt = $this->db->prepare($sql);
 				$stmt->execute();
 				$postName = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -93,13 +93,16 @@ class post extends Base
 			//for each user, if the session_id user's 'familioli' column includes '/ropogu(local)/public_html/rpp-pics/user_".$userId.".jpg', select all from posts where post_user = user_id
 	
 			//grab familioli of session user
-			$sql = "SELECT familioli FROM user WHERE user_id = ".$sessionUser. " ORDER BY date DESC";
+			$sql = "SELECT familioli FROM user WHERE user_id = ".$sessionUser;
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute();
 			$fam = $stmt->fetch(PDO::FETCH_ASSOC); 
 		
+			//var_dump($fam); die;
+		
 			//find how many instances of the user_id rpp-pics there are in familioli string
 			$famNum = substr_count($fam['familioli'],"'/ropogu(local)/public_html/rpp-pics/user_");
+		
 		
 			//set initial instance of the newFamSubString to the full familioli string
 			$newFamSubString = $fam['familioli'];
@@ -141,7 +144,7 @@ class post extends Base
 		
 			for($x=0; $x<count($familioliPosts); $x++)
 			{
-				$sql = "SELECT name FROM user WHERE user_id = ".$familioliPosts[$x]['post_user'];
+				$sql = "SELECT username FROM user WHERE user_id = ".$familioliPosts[$x]['post_user'];
 				$stmt = $this->db->prepare($sql);
 				$stmt->execute();
 				$postName = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -150,13 +153,15 @@ class post extends Base
 		
 			return $familioliPosts;
 		}
+
 		elseif($userView != null)
 		{
-			$sql = "SELECT * FROM post WHERE post_user = ".$userView. " LIMIT 5 ORDER BY date DESC";
+			$sql = "SELECT * FROM post WHERE post_user = ".$userView. " ORDER BY date DESC LIMIT 5";
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute();
 			$topFive = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-		
+			
+			//var_dump($topFive); die;
 			return $topFive;
 		}
 	}

@@ -1,12 +1,14 @@
 <?php
 require_once('../inc/user.class.php');
 require_once('../inc/post.class.php');
+require_once('../inc/pm.class.php');
 
 $user = new user();
 $userDataArray = array();
 
 $post = new post();
 session_start();
+
 
 if(isset($_SESSION['username']))
 {
@@ -21,6 +23,9 @@ else
 	$sessionFamilioli = "";
 }
 
+$pm = new pm();
+$letters = $pm->displayLetters($sessionId, "unseen");
+$letterCount = count($letters);
 
 
 
@@ -49,6 +54,8 @@ if(isset($_REQUEST['addToFamilioli']))
 
  if(isset($_REQUEST['deleteFromFamilioli']))
 {
+	//echo "hoor";
+	//var_dump($_REQUEST['deleteFromFamilioli']); die;
 	$newFamilioli = $user->deleteFromFamilioli($_REQUEST['user_id'], $sessionId);
 	$_SESSION['familioli'] = $newFamilioli;
 	

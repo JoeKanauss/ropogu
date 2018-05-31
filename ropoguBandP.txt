@@ -1,0 +1,504 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+font-family: 'Amatic SC', cursive;
+
+
+Roly Poly Guacamole: message-posting CMS with user-following and private-messaging capabilities
+
+
+
+//Signature line to add at end of Roly Poly Letter, with option to add or not
+
+<h3>...Your Friend and Familioli<br><?php echo $sessionUsername;?></h3>
+
+if(!isset($_SESSION['user_id']))
+{
+	header('location: /ropogu(local)/public_html/ropogu.php');
+	exit;
+}
+
+
+
+
+<p>..........FROM: <?php echo $letter['from_id'];?></p>
+<p>..........MESSAGE: <?php echo $letter['message'];?></p>
+
+<?php echo $letterCount ;?>
+
+
+//Default color pattern
+dark green: #94A73E
+light green: #B6CB56 
+orange: #E2A93E
+yellow: #F2D54D
+tan: #DABC5C
+
+
+(Send a Letter to <?php echo $userDataArray['username'];?>)
+
+
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	
+	<link rel="stylesheet" type="text/css" href="./css/styles.css">
+
+
+
+
+
+
+<div class="container">
+	<div class="row navigation">
+	<div class="col-sm-12 logo-head">
+		<div class="logo-head-image">
+			<img src="./images/ropogu-logo.png" />
+		</div>
+	</div>
+	<nav class="navbar navbar-expand-lg navbar-light  col-sm-12">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	
+		<div class="collapse navbar-collapse" id="navbarContent">
+			<ul class="navbar-nav mr-auto">
+				<li><a href="/ropogu(local)/public_html/user-list.php">~User List~</a></li>
+				<li><a href="/ropogu(local)/public_html/user-edit.php">~User Edit~</a></li>
+				<li><a href="/ropogu(local)/public_html/user-logout.php">~User Logout~</a></li>
+				<li><a href="/ropogu(local)/public_html/posts.php">~Posts~</a></li>
+				<div class="letter-notification">
+					<?php if($letterCount > 0)
+					{ ?>
+					<a href="/ropogu(local)/public_html/pm-list.php"><img src="../public_html/images/letter.png" alt="unseen letters"></a>
+					<?php }
+					else
+					{ ?>
+					<a href="/ropogu(local)/public_html/pm-list.php"><img src="../public_html/images/noLetter.png" alt="unseen letters"></a>
+					<?php } ?>
+				</div>
+			</ul>	
+		</div>
+
+
+
+
+
+	<h2>=====================================</h2>
+	
+	<h1>MAKE A POST</h1>
+	
+	<form action="<?php echo $_SERVER['SCRIPT_NAME'];?>" method="post" >
+		<?php if(isset($postErrorsArray['message']))
+		{ ?>
+			<div><?php echo $postErrorsArray['message']; ?>
+			</div>
+		<?php } ?>
+		POST:<br>
+		<textarea name="message"></textarea><br>
+		<input type="text" name="date"><input type="text" name="post_user">
+		<input type="submit" name="post-message" value="Post Message" />
+	</form>
+	
+	<h2>=====================================</h2>
+	
+	<h1>MY POSTS</h1>
+	<br>
+	<?php foreach($sessionPosts as $message)
+	{
+	?>
+			[[ POST ]]<br>
+			<p><img src='/ropogu(local)/public_html/rpp-pics/user_<?php echo $message['post_user'];?>.jpg'  width="50px"/> You said:<br>
+			<?php echo $message['message'];?><br>
+			on <?php echo date('F jS, Y', strtotime($message['date']));?> at <?php echo date('h:i a', strtotime($message['date']));?><br>
+			<a href="post-delete.php?post_id=<?php echo $message['post_id']?>">DELETE POST</a><br>
+	<?php
+	}
+	?>
+	
+	<h2>=====================================</h2>
+	
+	<h1>FAMILIOLI POSTS</h1>
+	
+	<?php for($x=0; $x<sizeof($familioliPosts); $x++)
+	{ ?>
+		<p><a href='/ropogu(local)/public_html/user-view.php?user_id=<?php echo $familioliPosts[$x]['post_user'];?>'><img src='/ropogu(local)/public_html/rpp-pics/user_<?php echo $familioliPosts[$x]['post_user'];?>.jpg' alt='<?php echo $familioliPosts[$x][0]['name'];?>' title='<?php echo $familioliPosts[$x][0]['name'];?>' width="50px"/></a>
+			<?php echo $familioliPosts[$x][0]['name'];?> said:<br><?php echo $familioliPosts[$x]['message'];?><br>on <?php echo date('F jS, Y', strtotime($familioliPosts[$x]['date']));?> at <?php echo date('h:i a', strtotime($familioliPosts[$x]['date']));?></p>
+
+	<?php } ?>	
+	
+ 	<h2>=====================================</h2>
+	
+	<h1>All POSTS</h1>
+	<?php for($x=0; $x<sizeof($allPosts); $x++)
+	{ ?>
+		<p><a href='/ropogu(local)/public_html/user-view.php?user_id=<?php echo $allPosts[$x]['post_user'];?>'><img src='/ropogu(local)/public_html/rpp-pics/user_<?php echo $allPosts[$x]['post_user'];?>.jpg' alt='<?php echo $allPosts[$x][0]['name'];?>' title='<?php echo $allPosts[$x][0]['name'];?>' width="50px"/></a>
+			<?php echo $allPosts[$x][0]['name'];?> said:<br><?php echo $allPosts[$x]['message'];?><br>on <?php echo date('F jS, Y', strtotime($allPosts[$x]['date']));?> at <?php echo date('h:i a', strtotime($allPosts[$x]['date']));?></p>
+
+	<?php } ?>
+
+
+
+
+
+
+<!--		<?php if(file_exists(dirname(__FILE__)."/../public_html/rpp-pics/user_".$sessionId.".jpg"))
+			{?>
+		<img src="/ropogu(local)/public_html/rpp-pics/user_<?php echo $sessionId;?>.jpg" /><br>
+		<?php
+		}?>
+-->	
+
+
+
+
+<sup>{ <?php echo $letterCount ;?> }</sup>
+
+
+$pm = new pm();
+$letters = $pm->displayLetters($sessionId, "unseen");
+$letterCount = count($letters);
+
+		
+		<div class="col-sm-12 col-lg-4 profile">
+			<h1 class="name">~ROPOGU~</h1>
+			<p class="quote">"Ropogu's quote..."</p>
+			
+			<img class="profile-image" src="./user_images/user_1.jpg" />
+	
+			<p class="description">This is ropogu's description. Look, isn't it nice?</p>
+		</div>
+
+
+
+
+
+
+
+rgba(201, 202, 204, 0)
+
+
+body{
+	background-color: #DABC5C;
+}
+
+
+
+
+* .profile{
+	background-color: lightyellow;
+	text-align: center;
+	font-family: 'Quicksand', sans-serif;
+	font-size: 1.25em;
+}
+.name{
+	font-family: 'Amatic SC', cursive;
+	font-size: 4em;
+	font-weight: bold;
+}
+.profile-image{
+	border: 5px solid black;
+	border-radius: 50%;
+	background-color: white;
+}*/
+
+
+
+
+$earliestDate = 999999999999999999999999999;
+for($u=0; $u<count($familioliPosts); $u++)
+{
+	if($familioliPosts[$u]['date']<$earliestDate)
+		{
+			echo "yes";
+						
+			$earliestDate = $familioliPosts[$u]['date'];
+			//$familioliPosts = array_push($familioliPosts, $familioliPosts[$u]['date']);
+		}
+		else
+		{
+			echo "no";
+		}
+}
+
+
+//$usersPost = ($post->displayUserPosts(2));
+	
+	//var_dump($usersPost);
+	//echo $usersPost[0]['message'];
+	
+	
+	/* for($i=0;$i<=count($allUsers)-1;$i++)
+	{
+		echo $allUsers[$i]['username']." ----- ".$allUsers[$i]['quote']."<br>";
+	} */
+			
+		
+		
+		//count substring to userId number
+		//for the number of times substring is found, go to that position x the iteration number
+		//select the posts from the user id matching that position
+		
+		
+		
+		
+		
+		
+		//for all of the users, if that user's id shows up in the session user's 'familioli' column, show their posts
+/*		for($i=0; $i<=sizeof($allUsers); $i++)
+		{
+
+			if(strpos($fam['familioli'],  "'/ropogu(local)/public_html/rpp-pics/user_".$i.".jpg'"))
+			{
+				$usersPost = $this->displayUserPosts($i);
+				for($i=0; $i<=sizeof($usersPost); $i++)
+				{
+					echo $usersPost[$i]['message']."---".$usersPost[$i]['date'] ."<br>";
+				}
+			}
+			else
+			{
+				echo "no";
+			}
+		}
+*/		
+		
+		// SELECT ALL USERS
+		// SELECT FAMILIOLI USERS
+		// IF USER APPEARS AS FAMIOLI USER, SHOW THEIR POST
+		// ^^ ABOVE IS A LONG WAY TO DO IT. THERE HAS TO BE A BETTER WAY! ^^
+		
+		
+		
+			
+			
+			
+			
+			/* //select all of the posts of the user whose user_id is found in the familioliId
+			$sql = "SELECT * FROM post WHERE post_user = ".$familioliId;
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute();
+		
+			$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+			//echo "<br>POSTS DUMP:  "; var_dump($posts);
+			
+			$familioliPosts = array_merge($familioliPosts, $posts);
+			 */
+			
+			
+			
+			
+					
+			//var_dump($familioliPosts); die;		
+			/* var_dump($familioliPosts);
+			echo "------------ ". $i ." ------------<br>";
+			echo "FAM NUM: ".$famNum."<br>";
+			echo "FAM ID: ".$familioliId."<br>";
+			echo "NEW FAM STRING: ".$newFamSubString."<br>"; */
+					
+		
+		
+		
+		
+		
+/*		
+		//grab all users
+		$sql = "SELECT user_id FROM user ";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute();
+		$allUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+*/		
+	//echo "<br><br> FAM NUM: ". $famNum;
+		//echo "<br><br> ". count($famIdArray);
+		
+		
+			//for the size of the session user's familioli
+		/* for($x=0; $x<$famNum; $x++)
+		{
+			//if the user_id is the first in the famIdArray, only add the user_id to the statment
+			if($x == 0)
+			{
+				$sql .= $famIdArray[$x];
+			}
+			//if the user_id is the last in the familyIdArray, add "OR", user_id, and ORDER BY clause to the statment
+			elseif($x == $famNum-1)
+			{
+				$sql .= " OR ". $famIdArray[$x] . " ORDER BY date DESC";
+			}
+			//if the user_id is neither the first nor the last in the familyIdArray, add "OR" and the user_id to the statement
+			else{
+				$sql.=" OR ". $famIdArray[$x];
+			}
+			
+		} */
+		
+		
+		
+		/*if(empty($this->data['password']))
+		{
+				$this->errors['password'] = "Please enter a password";
+		}
+		
+		if(empty($this->data['description']))
+		{
+				$this->errors['description'] = "Please enter a description of yourself";
+		} */
+		
+		
+		//validate data elements in userData property
+		//if an error exists, store to errors using column name as key
+		
+		
+		
+		
+		
+		
+		
+<button><a href="pm-edit.php?user_id=<?php echo $_REQUEST['user_id'];?>">Send a Letter to <?php echo $userDataArray['username'];?></a></button>
+			
+			<button><a href="user-list.php">Back to user List</a></button>
+			
+			
+			
+			
+			
+			
+			<!--			Username: <?php echo(isset($userDataArray['username']) ? $userDataArray['username']: ''); ?><br>
+			Quote: <?php echo(isset($userDataArray['quote']) ? $userDataArray['quote']: ''); ?><br>
+			Description: <?php echo(isset($userDataArray['description']) ? $userDataArray['description']: ''); ?><br>
+			User Image: 
+			<?php if(file_exists(dirname(__FILE__)."/../public_html/user_images/user_".$userDataArray['user_id'].".jpg"))
+			{?>
+			<br> <img src="/ropogu(local)/public_html/user_images/user_<?php echo $userDataArray['user_id'];?>.jpg" /><br>
+			<?php
+			}
+			else
+			{?>
+			This user has no image yet.<br>
+			<?php 
+			}?>
+			<?php echo $userDataArray['username'];?>'s Familioli:<br><?php echo $userDataArray['familioli'];?>
+			
+			
+			<?php 
+			if(isset($_SESSION['username']))
+			{
+				if(strpos($sessionFamilioli, "img src='/ropogu(local)/public_html/rpp-pics/user_".$userDataArray['user_id'].".jpg'")!=false)
+				{
+				?>
+				<form action="<?php echo $_SERVER['SCRIPT_NAME'];?>?user_id=<?php echo $userDataArray['user_id'];?>" method="post">
+					<input type="submit" name="deleteFromFamilioli" value="Delete User from Familioli" />
+				<form>
+				<?php
+				}
+				else if(strpos($sessionFamilioli, "img src='/ropogu(local)/public_html/rpp-pics/user_".$userDataArray['user_id'].".jpg'")===false)
+				{
+				?>
+				<form action="<?php echo $_SERVER['SCRIPT_NAME'];?>?user_id=<?php echo $userDataArray['user_id'];?>" method="post">
+					<input type="submit" name="addToFamilioli" value="Add User to Familioli" />
+				<form>
+				<?php
+				}
+			}
+				?>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<form action="<?php echo $_SERVER['SCRIPT_NAME'];?>" method="post" enctype="multipart/form-data">
+		<?php if(isset($userErrorsArray['username']))
+		{ ?>
+		<div><?php echo $userErrorsArray['username']; ?>
+		</div>
+		<?php } ?>
+		Username: <input type="text" name="username" value="<?php echo(isset($userDataArray['username']) ? $userDataArray['username']: ''); ?>"/><br>
+			
+		<?php if(isset($userErrorsArray['password']))
+		{ ?>
+		<div><?php echo $userErrorsArray['password']; ?>
+		</div>
+		<?php } ?>
+		Password: <input type="text" name="password" value="<?php echo(isset($userDataArray['password']) ? $userDataArray['password']: ''); ?>"/><br>
+			
+		<?php if(isset($userErrorsArray['name']))
+		{ ?>
+		<div><?php echo $userErrorsArray['name']; ?>
+		</div>
+		<?php } ?>
+		Name: <input type="text" name="name" value="<?php echo(isset($userDataArray['name']) ? $userDataArray['name']: ''); ?>"/><br>
+			
+		<?php if(isset($userErrorsArray['quote']))
+		{ ?>
+		<div><?php echo $userErrorsArray['quote']; ?>
+		</div>
+		<?php } ?>
+		Quote: <input type="text" name="quote" value="<?php echo(isset($userDataArray['quote']) ? $userDataArray['quote']: ''); ?>"/><br>
+			
+		<?php if(isset($userErrorsArray['description']))
+		{ ?>
+		<div><?php echo $userErrorsArray['description']; ?>
+		</div>
+		<?php } ?>
+		Description:<br>
+		<textarea name="description"><?php echo(isset($userDataArray['description']) ? $userDataArray['description']: ''); ?></textarea><br>
+			
+		User Image: <input type="file" name="user_image" /><br>
+			
+		<?php if(file_exists(dirname(__FILE__)."/../public_html/user_images/user_".$userDataArray['user_id'].".jpg"))
+		{
+		?>
+			<img src="/ropogu(local)/public_html/user_images/user_<?php echo $userDataArray['user_id'];?>.jpg" /><br>
+		<?php
+		}?>
+			
+		Roly Poly Pip Pic: <input type="file" name="rpp-pic" /><br>
+			
+		<?php if(file_exists(dirname(__FILE__)."/../public_html/rpp-pics/user_".$userDataArray['user_id'].".jpg"))
+		{
+		?>
+			<img src="/ropogu(local)/public_html/rpp-pics/user_<?php echo $userDataArray['user_id'];?>.jpg" /><br>
+		<?php
+		}?>
+			
+		<input type="hidden" name="user_id" value="<?php echo(isset($userDataArray['user_id']) ? $userDataArray['user_id']: ''); ?>"/>
+			
+		<input type="submit" name="save" value="Save"/>
+		<input type="submit" name="cancel" value="Cancel"/>
+	</form>

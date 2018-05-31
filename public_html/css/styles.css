@@ -1,17 +1,143 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 
-/* PM stylings */
+/* LAYOUT.html */
+body{
+	background-color: #94A73E;
+}
+.logo-head{
+	background-color: #94A73E;
+	text-align: center;
+}
+.logo-head-image{
+	margin: .5% auto;
+	width: 20%;
+	padding: 2%;
+	border-radius: 500px;
+	background-color: #F2D54D;
+}
+.logo-head-image img{
+	width: 100%;
+}
+.navigation{
+	background-color: #94A73E;
+	text-align: center;
+}
+.navigation button{
+	width: 100%;
+	margin: 0 auto;
+}
+.navigation .letter-notification{
+	margin: auto;
+}
+.navigation .letter-notification sup{
+	color: black;
+	padding-left: .45em;
+}
+.navigation .letter-notification a{
+	text-decoration: none;
+	background-color: rgba(000,000,000, 0);
+}
+.navigation .letter-notification img{
+	width: 50%;
+}
+.navbar-nav{
+	width: 100%;
+	text-align: center;
+}
+.navbar-nav li{
+	display: inline-block;
+	float: none;
+	margin: 0 auto;
+	
+}
+.navbar-nav a{
+	color: black;
+	width: 100%;
+	background-color: #DABC5C;	
+	margin: 1px auto;
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+/* USER-LOGIN.PHP */
+.login{
+	width: 90%;
+	min-height: 80%;
+	margin: auto;
+	background-color: #E2A93E;
+	text-align: center;
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+}
+.login input[type=text]{
+	font-family: "Quicksand", sans-serif;
+	font-size: .5em;
+	font-weight: bold;
+}
+.login input[type=submit]{
+	background-color: #F2D54D;	
+	border: none;
+	margin-top: 2%;
+	font-family: 'Amatic SC', cursive;
+	font-weight: bold;
+	cursor: pointer;
+}
+.login-image{
+	width: 80%;
+	margin: auto;
+	text-align: center;
+	margin: 2% auto;
+}
+.login-image img{
+	width: 75%;
+}
+
+
+
+/* PM-LIST.PHP */
+.letters{
+	background-color: #E2A93E;
+	min-height: 80vh;
+}
+.letters button{
+	width: 100%;
+	background-color: #B6CB56;	
+	border: none;
+	margin: 1% auto;
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+	cursor: pointer;
+}
+.letters img{
+	margin: auto;
+}
 .unseen-letter {
 	background-image: url("../images/unseenLetter.png");
 	background-repeat: no-repeat;
-	width: 400px;
+	background-size: contain;
+	width: 300px;
 	border: 2px solid transparent;
+	margin: auto;
+}
+.unseen-letters-section{
+	text-align: center;
+	display: none;
 }
 .seen-letter {
 	background-image: url("../images/seenLetter.png");
 	background-repeat: no-repeat;
-	width: 400px;
+	background-size: contain;
+	width: 300px;
 	border: 2px solid transparent;
+	margin: auto;
+}
+.all-letters-section{
+	text-align: center;
+	display: none;
 }
 .letter-info {
 	text-align: center;
@@ -23,4 +149,280 @@
 	font-weight: bold;
 	color: black;
 	text-decoration: none;
+}
+
+/*PM-LETTER-VIEW.PHP*/
+.letter-row{
+	background-color: #DABC5C;
+	min-height: 70vh;
+}
+.letter-present{
+	background-color: white;
+	background-size: cover;
+	width: 90%;
+	margin: 5% auto;
+	padding-top: 10%;
+	text-align: center;
+}
+.letter-present p{
+	padding-bottom: 5%;
+	font-family: "Quicksand", sans-serif;
+	font-size: 1.25em;
+}
+.from{
+	font-family: 'Amatic SC', cursive;
+	font-weight: normal;
+	font-size: 2em;
+	font-weight: bold;
+}
+.letter-present a{
+	color: black;
+	background-color: #E2A93E;	
+	border: none;
+	margin: 1% auto;
+	padding: 0 2%;
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+/* POSTS.PHP */
+
+.make-post{
+	background-color: #E2A93E;
+	text-align: center;
+	padding: 2% 0;
+}
+.make-post h1{
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+}
+.make-post textarea{
+	background-color: #F2D54D;
+	width: 95%;
+	margin-top: 1%;
+	border: none;
+}
+.view-post{
+	width: 100%;
+	min-height: 55vh;
+	background-color: #B6CB56;
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 2%;
+}
+.view-post h1{
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+}
+.view-post button{
+	width: 100%;
+	background-color: #DABC5C;	
+	border: none;
+	margin: 1% auto;
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+	cursor: pointer;
+}
+.all-posts, .fam-posts, .my-posts{
+	display: none;
+}
+
+
+/*USER-LOGGED.PHP*/
+.user{
+	background-color: #E2A93E;
+	width: 90%;
+	margin: auto;
+	text-align: center;
+	padding-bottom: 5%;
+}
+.user .user-image{
+	margin: 2% auto;
+}
+.user .user-image img{
+	max-width: 100%;
+	border: .25em solid brown;
+	background-color: white;
+}
+.user .name{
+	font-family: 'Amatic SC', cursive;
+	font-size: 1.5em;
+	font-weight: bold;
+	background-color: #B6CB56;
+	padding: 0 2%;
+}
+.user .quote{
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+	background-color: #F2D54D;
+	font-style: italic;
+	padding: 0 2%;
+}
+.user .description{
+	font-family: 'Quicksand', sans-serif;
+	font-size: 2em;
+	background-color: #DABC5C;
+	padding: 0 2%;
+}
+.user .familioli{
+	margin-bottom: 5%;
+}
+.user .familioli h1{
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+}
+.user .familioli img{
+	width: 100px;
+}
+.user .user-edit-button {
+	color: black;
+}
+.user .user-edit-button:hover{
+	text-decoration: none;
+	font-style: italic;
+}
+
+/*USER-VIEW.PHP*/
+.user-view{
+	background-color: #F2D54D;
+	width: 90%;
+	margin: auto;
+	text-align: center;
+	padding-bottom: 5%;
+}
+.user-view .user-image{
+	margin: 2% auto;
+}
+.user-view .user-image img{
+	max-width: 100%;
+	1border: .25em solid brown;
+	background-color: white;
+}
+.user-view .name{
+	font-family: 'Amatic SC', cursive;
+	font-size: 1.5em;
+	font-weight: bold;
+	background-color: #B6CB56;
+	padding: 0 2%;
+}
+.user-view .quote{
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+	padding: 0 2%;
+	background-color: #F2D54D;
+	font-style: italic;
+	
+}
+.user-view .description{
+	font-family: 'Quicksand', sans-serif;
+	font-size: 2em;
+	background-color: #E2A93E;
+	padding: 0 2%;
+}
+.user-view .familioli h1{
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+}
+.user-view .familioli img{
+	width: 100px;
+}
+.show-familioli{
+	display: none;
+}
+.show-latest-posts{
+	display: none;
+}
+.user-view button, input[type=submit]{
+	width: 95%;
+	background-color: #DABC5C;	
+	border: none;
+	margin: 1% auto;
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+	font-weight: bold;
+	cursor: pointer;
+}
+.user-view .famButton{
+	background-color: rgba(0,0,0,0);
+}
+.user-view .sendLetter{
+	margin-right: 10%;
+	cursor: pointer;
+}
+.user-view #deleteFromFamForm, #AddToFamForm{
+	display: inline-block;
+}
+
+/* USER-EDIT.PHP */
+.user form .user-image{
+	margin: 0;
+}
+.user form .name{
+	text-align: center;
+	background-color: rgba(0,0,0,0);
+}
+.user form .name input{
+	text-align: center;
+	background-color: #ccdb8a;
+	border: none;
+	font-size: 2em;
+}
+.user form .quote{
+	text-align: center;
+	background-color: rgba(0,0,0,0);
+	font-size: 3em;
+}
+.user form .quote input{
+	background-color: #f6e288;
+	border: none;
+	padding: 0 1%;
+}
+.user form .description{
+	text-align: center;
+	background-color: rgba(0,0,0,0);
+}
+.user form .description textarea{
+	text-align: center;
+	background-color: #e7d597;
+	border: none;
+}
+
+/* USER-LIST.PHP */
+.searchbar{
+	margin: 0 auto;
+	padding-top: 2%;
+	text-align: center;
+	font-size: 1.5em;
+	background-color: #F2D54D;
+}
+.searchbar input[type=submit]{
+	width: 50%;
+	font-size: 1.5em;
+}
+.user-list{
+	margin: auto;
+	width: 80%;
+	text-align: center;
+	font-family: 'Amatic SC', cursive;
+	font-size: 2.5em;
+	font-weight: bold;
+}
+.user-list .distinct-user{
+	float: left;
+	margin: 3% 2%;
+}
+.user-list .distinct-user a{
+	font-family: 'Quicksand', sans-serif;
+	font-size: .5em;
+	color: black;
+	background-color: #DABC5C;
 }
