@@ -1,10 +1,32 @@
 <?php
-	require_once('../inc/user.class.php');
-	require_once('../inc/pm.class.php');
+require_once('../inc/pm.class.php');
+require_once('../inc/user.class.php');
 	
-	session_start();
-	$sessionId = $_SESSION['user_id'];
-	$sessionUsername = $_SESSION['username'];
+session_start();
+
+$user = new user();
+$pm = new pm();
+
+$sessionUser = $_SESSION['username'];
+$sessionId = $_SESSION['user_id'];
+
+if(!isset($_SESSION['user_id']))
+{
+	header('location: /ropogu(local)/public_html/ropogu.php');
+	exit;
+}
+
+$user->load($sessionId);
+$userDataArray = $user->data;
+
+$letters = $pm->displayLetters($sessionId, "unseen");
+
+$letterCount = count($letters);
+	
+if($letterCount == 0)
+{
+	$letterCount = "";
+}
 	
 	if(isset($_REQUEST['user_id']) && $_REQUEST['user_id'] > 0)
 	{
@@ -35,7 +57,7 @@
 				//save
 				if($pm->save())
 				{
-					header('location: /ropogu(local)/tpl/pm-confirm.tpl.php');
+					header('location: /ropogu(local)/public_html/user-logged.php?user_id='.$sessionId);
 					exit;
 				}
 				else

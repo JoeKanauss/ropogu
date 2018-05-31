@@ -1,21 +1,44 @@
 <?php 
-	require_once('../inc/post.class.php');
+require_once('../inc/post.class.php');
+require_once('../inc/pm.class.php');
+require_once('../inc/user.class.php');
+
+session_start();
 	
-	session_start();
+$post = new post();
+$user = new user();
+$pm = new pm();
+
+$sessionUser = $_SESSION['username'];
+$sessionId = $_SESSION['user_id'];
+
+if(!isset($_SESSION['user_id']))
+{
+	header('location: /ropogu(local)/public_html/ropogu.php');
+	exit;
+}
+
+$user->load($sessionId);
+$userDataArray = $user->data;
+
+$letters = $pm->displayLetters($sessionId, "unseen");
+
+$letterCount = count($letters);
 	
-	$post = new post();
-	
-	$sessionUserId = $_SESSION['user_id'];
+if($letterCount == 0)
+{
+	$letterCount = "";
+}
 	
 	if(isset($_REQUEST['post_id']) && ($_REQUEST['post_id'] > 0))
 	{
 		$post->load($_REQUEST['post_id']);
 		$postData = $post->data;
 		
-		if($sessionUserId == $postData['post_user'])
+		//var_dump($postData['post_user']); die;
+		
+		if($sessionId == $postData['post_user'])
 		{
-			echo "YAY!";
-			
 			if(isset($_POST['deletePost']))
 			{
 				if($_POST['delete']=="yes")

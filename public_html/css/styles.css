@@ -187,8 +187,28 @@ body{
 	cursor: pointer;
 }
 
-/* POSTS.PHP */
 
+/* PM-EDIT.PHP */
+.letter-send{
+	background-color: #F2D54D;
+	text-align: center;
+}
+.letter-send h1{
+	font-family: 'Amatic SC', cursive;
+	font-size: 4em;
+	font-weight: bold;
+}
+.letter-send h2{
+	text-align: left;
+	padding-left: 7.5%;
+	font-size: 1.5em;
+}
+.letter-send form textarea{
+	width: 85%;
+}
+
+
+/* POSTS.PHP */
 .make-post{
 	background-color: #E2A93E;
 	text-align: center;
@@ -425,4 +445,45 @@ body{
 	font-size: .5em;
 	color: black;
 	background-color: #DABC5C;
+}
+
+
+/* DELETE-POST/lETTER.PHP */
+.delete-section{
+	background-color: #E2A93E;
+	text-align: center;
+}
+.delete-section h1{
+	font-family: "Amatic SC", cursive;
+	font-size: 4em;
+	font-weight: bold;
+	color: #912828;
+}
+.delete-section h2{
+	font-family: "Amatic SC", cursive;
+	font-size: 2em;
+	font-weight: bold;
+}
+.delete-section .to-delete{
+	background-color: white;
+	min-height: 15%;
+	padding: 2.5% 0;
+	width: 95%;
+	margin: auto;
+	font-size: 1.5em;
+}
+.delete-section form {
+	font-size: 1.5em;
+}
+.delete-section form input[type="radio"] {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+    transform: scale(1.5);
+	margin-right: 1%;
+}
+.detail{
+	font-family: 'Quicksand', sans-serif;
+	font-weight: normal;
+	font-size: .65em;
+	1font-weight: bold;
 }

@@ -36,6 +36,42 @@ tan: #DABC5C
 (Send a Letter to <?php echo $userDataArray['username'];?>)
 
 
+
+require_once('../inc/pm.class.php');
+require_once('../inc/user.class.php');
+	
+session_start();
+
+$user = new user();
+$pm = new pm();
+
+$sessionUser = $_SESSION['username'];
+$sessionId = $_SESSION['user_id'];
+
+if(!isset($_SESSION['user_id']))
+{
+	header('location: /ropogu(local)/public_html/ropogu.php');
+	exit;
+}
+
+$user->load($sessionId);
+$userDataArray = $user->data;
+
+$letters = $pm->displayLetters($sessionId, "unseen");
+
+$letterCount = count($letters);
+	
+if($letterCount == 0)
+{
+	$letterCount = "";
+}
+
+
+
+
+
+
+
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">

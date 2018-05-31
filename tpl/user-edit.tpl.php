@@ -88,7 +88,7 @@
 					<?php
 						}
 					}?>
-					<input type="file" name="user_image" /></p>
+					<input type="file" name="rpp-pic" /></p>
 				</div>
 				
 				<h3>Username</h3>

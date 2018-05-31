@@ -19,6 +19,9 @@ if(isset($_SESSION['user_id']))
 
 	$user->load($sessionId);
 	$userDataArray = $user->data;
+	
+	$userId = $userDataArray['user_id'];
+	$userPass = $userDataArray['password'];
 
 	$letters = $pm->displayLetters($sessionId, "unseen");
 
@@ -38,6 +41,10 @@ if(isset($_SESSION['user_id']))
 	if(isset($_POST['save']))
 	{
 		$userDataArray = $_POST;
+		$userDataArray['user_id'] = $userId;
+		$userDataArray['password'] = $userPass;
+		
+		//var_dump($userDataArray); die;
 	
 		//sanitize
 		$user->sanitize($userDataArray);
@@ -53,7 +60,7 @@ if(isset($_SESSION['user_id']))
 			
 				$user->savePipPic($_FILES['rpp-pic']);
 			
-				header('location: /ropogu(local)/public_html/user-login.php');
+				header('location: /ropogu(local)/public_html/user-logged.php?user_id='.$userDataArray['user_id']);
 				exit;
 			}
 			else

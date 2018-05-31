@@ -11,7 +11,7 @@ class user extends Base
 		parent::__construct();
 		$this->tableName = "user";
 		$this->keyField = "user_id";
-		$this->columnNames = array("username", "password", "name", "description", "quote");
+		$this->columnNames = array("username", "password", "description", "quote");
 	}
 	
 	
@@ -21,7 +21,6 @@ class user extends Base
 		//sanitize data based on rules
 		$this->data["username"] = filter_var($dataArray["username"], FILTER_SANITIZE_STRING);
 		$this->data["password"] = filter_var($dataArray["password"], FILTER_SANITIZE_STRING);
-		$this->data["name"] = filter_var($dataArray["name"], FILTER_SANITIZE_STRING);
 		$this->data["description"] = filter_var($dataArray["description"], FILTER_SANITIZE_STRING);
 		$this->data["quote"] = filter_var($dataArray["quote"], FILTER_SANITIZE_STRING);
 		
